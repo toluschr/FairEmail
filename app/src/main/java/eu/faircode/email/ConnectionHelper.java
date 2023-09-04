@@ -340,6 +340,10 @@ public class ConnectionHelper {
 
         Network[] networks = cm.getAllNetworks();
         if (networks != null && networks.length == 1) {
+            // Standalone VPN disabled, but Standalone VPN Active (Indicates no underlying internet connection)
+            if (vpnActive(context))
+                return null;
+
             // Standalone VPN
             boolean metered = cm.isActiveNetworkMetered();
             Log.i("isMetered: active VPN metered=" + metered);
